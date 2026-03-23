@@ -33,7 +33,7 @@ def test_get_passenger_destination_not_0_in_ground_floor(
     (5),
     (6)
 ])
-def test_get_passenger_destination_0_not_ground_floor_chance_false(
+def test_get_passenger_destination_chance_false_in_15th_floor(
     mocker,new_pass
 ):
     mock_chance_happens = mocker.patch('src.passenger.happens_by_chance')
@@ -57,7 +57,7 @@ def test_get_passenger_destination_0_not_ground_floor_chance_false(
     (5),
     (6)
 ])
-def test_get_passenger_destination_not_0_not_ground_floor_chance_true(
+def test_get_passenger_destination_chance_true_in_15th_floor(
     mocker,new_pass
 ):
     mock_chance_happens = mocker.patch('src.passenger.happens_by_chance')

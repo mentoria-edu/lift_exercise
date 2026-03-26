@@ -19,7 +19,7 @@ def mock_happens_by_chance_false(mocker):
     return mock_chance_false
 
 
-@pytest.fixture(params=range(1, 6 + 1))
+@pytest.fixture(params=list(range(1, 6 + 1)))
 def new_passenger_amount(request):
     return request.param
 

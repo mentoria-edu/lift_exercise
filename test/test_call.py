@@ -12,16 +12,20 @@ def mock_happens_by_chance_true(mocker):
 
 
 @pytest.fixture
-def mock_randint_value(mocker):
-    mock_random_floor = mocker.patch('src.call.randint')
-    mock_random_floor.return_value = 1
+def mock_randint(mocker):
+    def mock_randint_value(randint_value):
+        mock_random_floor = mocker.patch('src.call.randint')
+        mock_random_floor.return_value = randint_value
+        
+        return mock_random_floor
 
-    return mock_random_floor
+    return mock_randint_value
 
 
 def test_call_elevator_calling_floor(
-    mock_happens_by_chance_true, mock_randint_value
+    mock_happens_by_chance_true, mock_randint
 ):
+    randint_value = mock_randint(randint_value=1)
     floor_passenger = {2: 3}
 
     new_called_floor = src.call.call_elevator(floor_passenger=floor_passenger)
@@ -30,9 +34,10 @@ def test_call_elevator_calling_floor(
 
 
 def test_call_elevator_calling_already_called_floor(
-    mock_happens_by_chance_true, mock_randint_value
+    mock_happens_by_chance_true, mock_randint
 ):
-    floor_passenger = {1: 1}
+    randint_value = mock_randint(randint_value=2)
+    floor_passenger = {2: 1}
 
     new_called_floor = src.call.call_elevator(floor_passenger=floor_passenger)
 
